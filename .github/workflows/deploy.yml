@@ -32,4 +32,4 @@ jobs:
         run: scripts/stamp-assets.sh "${GITHUB_SHA::8}"
 
       - name: Deploy to Cloudflare Pages
-        run: npx wrangler@4.161.0 pages deploy --project-name=mom-website --branch=main --commit-dirty=true
+        run: npx wrangler@4.161.0 pages deploy --project-name=harris-interiors --branch=main --commit-dirty=true

@@ -1,6 +1,8 @@
+import { houseSvg } from "./placeholder.js";
+
 // Studio details used in the header, footer and contact page. Placeholders until she picks them.
 export const SITE = {
-  name: "Studio Name",
+  name: "Harris Interiors",
   tagline: "Interior Design",
   email: "hello@example.com",
   city: "Toronto, Ontario",
@@ -49,14 +51,12 @@ function renderFooter(el) {
     <p class="footer-small">© ${new Date().getFullYear()} ${SITE.name}</p>`;
 }
 
-// Images without a src render as a tinted stand-in, so the layout can be judged before real photos exist.
-export function picture(img, { eager = false, sizes = "100vw" } = {}) {
+// Images without a src render as a cartoon house, so the layout can be judged before real photos exist.
+export function picture(img, { eager = false, sizes = "100vw", shift = 0 } = {}) {
   if (img.src) {
     return `<img src="${img.src}" alt="${img.alt || img.room || ""}" sizes="${sizes}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'}>`;
   }
-  const [wall, floor, accent] = img.tone || ["#d9d0c3", "#a89884", "#7d6a55"];
-  return `<div class="ph" role="img" aria-label="${img.room || "Photo"}" style="--wall:${wall};--floor:${floor};--accent:${accent}">
-    <span>${img.room || "Photo"}</span></div>`;
+  return `<div class="ph" role="img" aria-label="${img.room || "Photo"}">${houseSvg(img.house, img.scene, shift)}<span>${img.room || "Photo"}</span></div>`;
 }
 
 const header = document.querySelector("[data-site-header]");

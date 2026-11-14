@@ -4,7 +4,7 @@
 # secrets and connects the domain. Safe to re-run; each step skips what exists.
 set -euo pipefail
 
-PROJECT=mom-website
+PROJECT=harris-interiors
 CF=https://api.cloudflare.com/client/v4
 cd "$(dirname "$0")/.."
 REPO=$(git remote get-url origin 2>/dev/null | sed -E 's#^(git@github.com:|https://github.com/)##; s#\.git$##')

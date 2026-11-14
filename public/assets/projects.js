@@ -1,8 +1,9 @@
 // Sample projects. Each image takes a `src` (path under /images/) once real photos exist;
-// until then `tone` sets the stand-in colours (wall, floor, accent).
+// until then it shows a cartoon house in the project's `house` colour.
 export const PROJECTS = [
   {
     slug: "victorian-family-home",
+    house: "#8fb3d9",
     title: "Victorian Family Home",
     location: "Toronto",
     year: 2025,
@@ -13,15 +14,16 @@ export const PROJECTS = [
       "Furniture was a mix of new upholstered pieces and the family's own antiques, re-covered in linens and wools that stand up to children and a dog.",
     ],
     images: [
-      { room: "Living room", tone: ["#e4dccf", "#9c8670", "#6f5843"] },
-      { room: "Kitchen", tone: ["#ece8e1", "#b8a58e", "#3f4a44"] },
-      { room: "Dining room", tone: ["#d8cbb8", "#8a7058", "#5b3f2c"] },
-      { room: "Stair hall", tone: ["#e9e2d6", "#a3896d", "#7a6450"] },
-      { room: "Primary bedroom", tone: ["#ddd6cc", "#b09a82", "#8b7d6b"] },
+      { room: "Living room" },
+      { room: "Kitchen" },
+      { room: "Dining room" },
+      { room: "Stair hall" },
+      { room: "Primary bedroom" },
     ],
   },
   {
     slug: "lakeside-cottage",
+    house: "#f2cf6b",
     title: "Lakeside Cottage",
     location: "Muskoka",
     year: 2024,
@@ -32,14 +34,15 @@ export const PROJECTS = [
       "Colours come from the view: pale greens and greys, weathered wood, and a little rust red.",
     ],
     images: [
-      { room: "Great room", tone: ["#dfe2da", "#a08a6c", "#5d6b5a"] },
-      { room: "Dining", tone: ["#e6e3db", "#9a7d5f", "#8c4a32"] },
-      { room: "Screened porch", tone: ["#d5dbd2", "#8f7a60", "#4f5d4f"] },
-      { room: "Bunk room", tone: ["#e8e4da", "#ad9472", "#6c7b6a"] },
+      { room: "Great room" },
+      { room: "Dining" },
+      { room: "Screened porch" },
+      { room: "Bunk room" },
     ],
   },
   {
     slug: "city-condo",
+    house: "#e39b88",
     title: "City Condo",
     location: "Toronto",
     year: 2024,
@@ -50,14 +53,15 @@ export const PROJECTS = [
       "A soft palette of stone, oak and cream keeps the small rooms quiet, with colour coming from the art.",
     ],
     images: [
-      { room: "Living room", tone: ["#ebe6de", "#8e7258", "#4a3b2e"] },
-      { room: "Kitchen", tone: ["#e7e3dc", "#c1b19c", "#5a524a"] },
-      { room: "Library wall", tone: ["#ddd3c4", "#7f644b", "#3e2f23"] },
-      { room: "Bedroom", tone: ["#e9e1d8", "#b8a18a", "#a07c6a"] },
+      { room: "Living room" },
+      { room: "Kitchen" },
+      { room: "Library wall" },
+      { room: "Bedroom" },
     ],
   },
   {
     slug: "farmhouse-kitchen",
+    house: "#9fc29a",
     title: "Farmhouse Kitchen",
     location: "Prince Edward County",
     year: 2023,
@@ -68,12 +72,19 @@ export const PROJECTS = [
       "Limewashed walls, unlacquered brass and reclaimed pine floors were chosen to age with the house.",
     ],
     images: [
-      { room: "Kitchen", tone: ["#ede6d9", "#9d7f5c", "#4d5a4c"] },
-      { room: "Island", tone: ["#e2d9ca", "#8a6c4c", "#b08d57"] },
-      { room: "Pantry", tone: ["#e8e1d3", "#a68a69", "#6d7b6e"] },
-      { room: "Mudroom", tone: ["#dad3c6", "#7d6a55", "#3f4c45"] },
+      { room: "Kitchen" },
+      { room: "Island" },
+      { room: "Pantry" },
+      { room: "Mudroom" },
     ],
   },
 ];
+
+for (const p of PROJECTS) {
+  p.images.forEach((img, i) => {
+    img.house ??= p.house;
+    img.scene ??= i;
+  });
+}
 
 export const bySlug = (slug) => PROJECTS.find((p) => p.slug === slug);

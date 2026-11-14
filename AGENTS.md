@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Portfolio site for an interior designer (Jonti's mother). Static HTML, CSS
+Portfolio site for Harris Interiors, Mel Harris's interior design studio. Static HTML, CSS
 and JS in `public/`, no build step, served by Cloudflare Pages. One Pages
 Function handles the contact form. The name, domain and copy are
 placeholders until she picks them.
@@ -12,8 +12,8 @@ placeholders until she picks them.
   helper and the scroll-in fade (`.reveal`).
 - `public/assets/projects.js`: the portfolio. Each project has a slug,
   facts, text and a list of images. An image without `src` renders as a
-  tinted stand-in using its `tone` colours; add real photos under
-  `public/images/<slug>/` and set `src`.
+  cartoon house (`placeholder.js`) in the project's `house` colour; add
+  real photos under `public/images/<slug>/` and set `src`.
 - `public/portfolio/project.html`: one page for every project.
   `_redirects` rewrites `/portfolio/<slug>` to it and `project.js` reads
   the slug from the path. Unknown slugs bounce to `/portfolio/`.
@@ -38,7 +38,7 @@ SSH with `~/.ssh/JontiH`. Run `gh` with
 | Name | Value |
 |------|-------|
 | Account | not created yet |
-| Pages project | `mom-website` (`mom-website.pages.dev`) |
+| Pages project | `harris-interiors` (`harris-interiors.pages.dev`) |
 | Pages secrets | `CONTACT_TO`, `RESEND_API_KEY` |
 | `wrangler.toml` vars | `EMAIL_FROM` (placeholder address) |
 
