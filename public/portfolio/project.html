@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project · Studio Name</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/project.js"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main id="project">
+    <section class="section" style="padding-top: 3rem">
+      <div class="wrap project-head">
+        <div>
+          <p class="eyebrow"><a href="/portfolio/" style="text-decoration: none">Portfolio</a></p>
+          <h1 data-f="title"></h1>
+        </div>
+        <dl class="facts">
+          <dt>Location</dt><dd data-f="location"></dd>
+          <dt>Scope</dt><dd data-f="scope"></dd>
+          <dt>Year</dt><dd data-f="year"></dd>
+        </dl>
+      </div>
+
+      <div class="gallery" aria-roledescription="carousel" aria-label="Project photos">
+        <div class="gallery-track" tabindex="0"></div>
+        <div class="gallery-bar">
+          <span class="count" aria-live="polite"></span>
+          <div class="arrows">
+            <button class="arrow prev" aria-label="Previous photo">←</button>
+            <button class="arrow next" aria-label="Next photo">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap" style="margin-top: clamp(4rem, 8vw, 7rem)">
+        <p class="lede reveal" data-f="summary" style="max-width: 40ch; margin-bottom: 3rem"></p>
+        <div class="project-body reveal" data-f="body"></div>
+      </div>
+    </section>
+
+    <a class="next-project" href="/portfolio/">
+      <p class="eyebrow">Next project</p>
+      <h2 data-f="next"></h2>
+    </a>
+  </main>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div class="frame"></div>
+    <button class="lb-close">Close</button>
+    <button class="lb-prev" aria-label="Previous photo">←</button>
+    <button class="lb-next" aria-label="Next photo">→</button>
+    <span class="lb-count"></span>
+  </div>
+  <footer class="site-footer" data-site-footer></footer>
+</body>
+</html>

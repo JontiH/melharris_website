@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact · Studio Name</title>
+  <meta name="description" content="Get in touch about an interior design project.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/contact.js"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main>
+    <section class="section" style="padding-top: 3rem">
+      <div class="wrap contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Contact</p>
+          <h1>Let's talk.</h1>
+          <p class="lede">Tell us a little about your home and what you have in mind. We reply within two business days.</p>
+          <dl class="contact-details">
+            <dt>Email</dt><dd><a data-email></a></dd>
+            <dt>Studio</dt><dd data-city></dd>
+          </dl>
+        </div>
+
+        <form class="contact reveal" novalidate>
+          <div class="two">
+            <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required maxlength="200"></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="200"></div>
+          </div>
+          <div class="two">
+            <div class="field"><label for="phone">Phone (optional)</label><input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="50"></div>
+            <div class="field">
+              <label for="type">Project</label>
+              <select id="type" name="type">
+                <option>Full renovation</option>
+                <option>Furnishing and styling</option>
+                <option>Single room</option>
+                <option>Consultation</option>
+                <option>Something else</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><label for="message">Tell us about it</label><textarea id="message" name="message" required maxlength="5000"></textarea></div>
+          <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+          <div><button class="button" type="submit">Send</button></div>
+          <p class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+</body>
+</html>
