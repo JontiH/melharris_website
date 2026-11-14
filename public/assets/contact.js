@@ -7,9 +7,8 @@ document.querySelector("[data-city]").textContent = SITE.city;
 
 const form = document.querySelector("form.contact");
 const status = form.querySelector(".form-status");
-const button = form.querySelector("button[type=submit]");
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   status.classList.remove("error");
   if (!form.checkValidity()) {
@@ -17,22 +16,10 @@ form.addEventListener("submit", async (e) => {
     status.textContent = "Please fill in your name, a valid email and a message.";
     return;
   }
-  button.disabled = true;
-  status.textContent = "Sending…";
-  try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(new FormData(form))),
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.error || "send failed");
-    form.reset();
-    status.textContent = "Thank you. Your message is on its way and we'll be in touch soon.";
-  } catch {
-    status.classList.add("error");
-    status.textContent = `Sorry, that didn't go through. Please email ${SITE.email} directly.`;
-  } finally {
-    button.disabled = false;
-  }
+  const f = Object.fromEntries(new FormData(form));
+  const signature = [f.name, f.email, f.phone, f.type && `Project: ${f.type}`].filter(Boolean);
+  const body = `${f.message}\n\n${signature.join("\n")}`;
+  const subject = `Project enquiry from ${f.name}`;
+  location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  status.textContent = `Your email app should open with the message ready to send. If it doesn't, write to ${SITE.email}.`;
 });

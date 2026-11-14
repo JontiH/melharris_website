@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # One-time setup: gets a Cloudflare account ID and token from you, then creates
-# the Pages project, sets the GitHub secret and variable, sets the contact form
-# secrets and connects the domain. Safe to re-run; each step skips what exists.
+# the Pages project, sets the GitHub secret and variable and connects the
+# domain. Safe to re-run; each step skips what exists.
 set -euo pipefail
 
 PROJECT=harris-interiors
@@ -89,23 +89,8 @@ printf '%s' "$TOKEN" | gh_ secret set CLOUDFLARE_API_TOKEN -R "$REPO"
 gh_ variable set CLOUDFLARE_ACCOUNT_ID -R "$REPO" --body "$ACCOUNT_ID"
 echo "Set. Pushes to main now deploy."
 
-# 4. Contact form
-say "Step 4: contact form email"
-echo "Messages from the contact form are emailed through Resend (resend.com) to these addresses."
-read -rp "Send messages to (commas for several), blank to keep the current one: " TO
-read -rsp "Resend API key (hidden), blank to keep the current one: " RESEND; echo
-vars=$(TO="$TO" RESEND="$RESEND" python3 -c '
-import json, os
-v = {}
-if os.environ["TO"]: v["CONTACT_TO"] = {"type": "secret_text", "value": os.environ["TO"]}
-if os.environ["RESEND"]: v["RESEND_API_KEY"] = {"type": "secret_text", "value": os.environ["RESEND"]}
-print(json.dumps({"deployment_configs": {"production": {"env_vars": v}}}))
-')
-cf -X PATCH "$CF/accounts/$ACCOUNT_ID/pages/projects/$PROJECT" -d "$vars" | field name >/dev/null
-echo "Saved. They take effect on the next deploy."
-
-# 5. Custom domain
-say "Step 5: custom domain"
+# 4. Custom domain
+say "Step 4: custom domain"
 if [ -z "$DOMAIN" ]; then
   echo "No domain set. Add DOMAIN= to .env and re-run once the domain is on Cloudflare."
 else

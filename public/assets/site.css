@@ -356,7 +356,6 @@ form.contact { display: grid; gap: 1.75rem; }
 .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-bottom-color: var(--ink); }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
 @media (max-width: 600px) { .two { grid-template-columns: 1fr; } }
-.hp { position: absolute; left: -9999px; }
 .form-status { min-height: 1.5em; margin: 0; }
 .form-status.error { color: #9b3b2a; }
 
