@@ -43,21 +43,27 @@ if [ -z "$ACCOUNT_ID" ]; then
   read -rp "Account ID: " ACCOUNT_ID
   [ -n "$ACCOUNT_ID" ] || die "No account ID entered."
 fi
+if [ -z "$DOMAIN" ]; then
+  read -rp "Site domain (e.g. example.com), blank to skip for now: " DOMAIN
+fi
 if [ -z "$TOKEN" ]; then
-  perms='[{"key":"page","type":"edit"},{"key":"zone","type":"read"},{"key":"dns","type":"edit"}]'
-  url="https://dash.cloudflare.com/$ACCOUNT_ID/api-tokens?permissionGroupKeys=$(python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.argv[1]))' "$perms")&name=$PROJECT"
+  if [ -n "$DOMAIN" ]; then
+    perms='[{"key":"page","type":"edit"},{"key":"zone","type":"read"},{"key":"dns","type":"edit"}]'
+    perm_text="Pages Edit, Zone Read, DNS Edit. Under Zone Resources pick 'Specific zone' -> $DOMAIN."
+  else
+    perms='[{"key":"page","type":"edit"}]'
+    perm_text="Pages Edit. Add Zone Read and DNS Edit for the domain later, when it's on Cloudflare."
+  fi
+  url="https://dash.cloudflare.com/?to=/:account/api-tokens&permissionGroupKeys=$(python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.argv[1]))' "$perms")&name=$PROJECT"
   say "Step 1b: create a Cloudflare token"
-  echo "Opening the dashboard with the permissions filled in: Pages Edit, Zone Read, DNS Edit."
-  echo "Under Zone Resources pick 'Specific zone' and the site's domain, then Continue -> Create Token."
+  echo "Opening the dashboard with the permissions filled in: $perm_text"
+  echo "Then Continue -> Create Token."
   echo
   echo "  $url"
   xdg-open "$url" >/dev/null 2>&1 || true
   echo
   read -rsp "Paste the token here (hidden): " TOKEN; echo
   [ -n "$TOKEN" ] || die "No token entered."
-fi
-if [ -z "$DOMAIN" ]; then
-  read -rp "Site domain (e.g. example.com), blank to skip for now: " DOMAIN
 fi
 
 status=$(cf "$CF/accounts/$ACCOUNT_ID/tokens/verify" | field status 2>/dev/null || cf "$CF/user/tokens/verify" | field status)

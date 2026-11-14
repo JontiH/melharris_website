@@ -37,13 +37,13 @@ SSH with `~/.ssh/JontiH`. Run `gh` with
 
 | Name | Value |
 |------|-------|
-| Account | not created yet |
+| Account | `7679249973b3ca7cd658c198c69e1e5e` (Jonti's, shared with his other sites; move to her own account later) |
 | Pages project | `harris-interiors` (`harris-interiors.pages.dev`) |
 | Pages secrets | `CONTACT_TO`, `RESEND_API_KEY` |
 | `wrangler.toml` vars | `EMAIL_FROM` (placeholder address) |
 
 `scripts/setup.sh` does the one-time setup and is safe to re-run: asks for
-the account ID and a token (Pages Edit, Zone Read, DNS Edit), creates the
+the account ID and a token for this project only (Pages Edit, plus Zone Read and DNS Edit once a domain is set), creates the
 Pages project, sets the `CLOUDFLARE_API_TOKEN` secret and
 `CLOUDFLARE_ACCOUNT_ID` variable on the GitHub repo, sets the contact form
 secrets and points the domain and `www` at Pages. It writes `.env`
